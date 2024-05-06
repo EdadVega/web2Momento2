@@ -11,7 +11,7 @@ function Login() {
     const [isLoggin, setIsLoggin] = useState(false)
 
     const validarCredenciales = () => {
-        const usuarioValido = usuarios.find(usuario => usuario.user === username && usuario.contrasena === password);
+        const usuarioValido = usuarios.find(usuario => usuario.user === username && usuario.password === password);
         if (usuarioValido) {
             setIsLoggin(true); 
             
