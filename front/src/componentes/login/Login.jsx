@@ -1,48 +1,62 @@
-import React, { useEffect, useState } from 'react'
-import './login.css'
+import React, { useState } from 'react';
+import './login.css';
+import {usuarios} from '../database/DataBase'
+import { Navigate } from 'react-router-dom';
 
-let urlUsuarios = "http://localhost:3001/usuarios"
+
 function Login() {
-    const [usuarios, setUsuarios] = useState([])
+    
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-    
-    const fetchData = async()=>{
-        const response =await fetch(urlUsuarios);
-        if(!response.ok){
-            console.log("error")
-        }
-        const data =await response.json();
-        setUsuarios(data);
-        
-        
-        }
-        
-        useEffect(()=>{
-            fetchData();
-        },[])
-        
-        console.log(usuarios)
+    const [isLoggin, setIsLoggin] = useState(false)
 
+    const validarCredenciales = () => {
+        const usuarioValido = usuarios.find(usuario => usuario.user === username && usuario.contrasena === password);
+        if (usuarioValido) {
+            setIsLoggin(true); 
+            
+        } else {
+            console.log("Error de credenciales");
+        }
+    };
+
+    if (isLoggin) {
+       
+        return <Navigate to="/home" />;
+    }
+
+            
+       
+    
+
+
+    
     const handleUsername =(e)=>{
-        console.log(e.target.value)
+        setUsername(e.target.value)
     }
     const handlePassword =(e)=>{
-        console.log(e.target.value)
+        setPassword(e.target.value)
     }
+
+    
   return (
     <>
         <div className='login-caja'>
             <div className='login'>
                 <h1>Login</h1>
                 <label>Username</label>
-                <input type="text"  onChange={handleUsername}/>
+                <input type="text"  value={username}  onChange={handleUsername}/>
                 <label>Password</label>
-                <input type="text" onChange={handlePassword}/>
-                <button className='btnlogin'>Login</button>
+                <input type="password" value={password} onChange={handlePassword}/>
+                <button className='btnlogin' onClick={validarCredenciales} >Login</button>
                 
             </div>
+            
+            
         </div>
+        
+                   
+        
     </>
   )
 }

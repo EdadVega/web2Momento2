@@ -1,0 +1,27 @@
+.HomeCont, .UsuCont{
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.navHead{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    background-color: rgb(63, 63, 226);
+    padding: 45vh 0;
+    padding-left: 2%;
+  
+}
+.navHead > a{
+    color: #fff;
+    text-decoration: none;
+    margin-top: 15%;
+}
+
+.navHead > img{
+    border: 1px solid black;
+    width: 220px;
+    height: 195px;
+}
